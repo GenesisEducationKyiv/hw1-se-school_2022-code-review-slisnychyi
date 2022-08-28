@@ -7,23 +7,18 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailService {
-    private final JavaMailSender javaMailSender;
-    private final SubscriptionsRepository subscriptionsRepository;
-    private final RateService rateService;
+public record EmailService(
+        JavaMailSender mailSender,
+        SubscriptionsRepository subscriptionsRepository,
+        RateService rateService) {
 
-    public EmailService(SubscriptionsRepository subscriptionsRepository, JavaMailSender javaMailSender, RateService rateService) {
-        this.subscriptionsRepository = subscriptionsRepository;
-        this.javaMailSender = javaMailSender;
-        this.rateService = rateService;
-    }
 
     public void sendEmails() throws RateException {
         Long rate = rateService.getBtcRate()
                 .orElseThrow(() -> new RateException("unable to receive rates."));
         String[] emails = subscriptionsRepository.getSubscriptions().toArray(new String[]{});
         SimpleMailMessage msg = generateEmali(rate, emails);
-        javaMailSender.send(msg);
+        mailSender.send(msg);
     }
 
     private SimpleMailMessage generateEmali(Long rate, String[] emails) {

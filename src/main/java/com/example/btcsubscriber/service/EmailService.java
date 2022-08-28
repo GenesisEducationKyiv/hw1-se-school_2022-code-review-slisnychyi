@@ -22,11 +22,16 @@ public class EmailService {
         Long rate = rateService.getBtcRate()
                 .orElseThrow(() -> new RateException("unable to receive rates."));
         String[] emails = subscriptionsRepository.getSubscriptions().toArray(new String[]{});
+        SimpleMailMessage msg = generateEmali(rate, emails);
+        javaMailSender.send(msg);
+    }
+
+    private SimpleMailMessage generateEmali(Long rate, String[] emails) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(emails);
         msg.setSubject("BTC to UAH rate");
         msg.setText("BTC to UAH rate = " + rate);
-        javaMailSender.send(msg);
+        return msg;
     }
 
 }

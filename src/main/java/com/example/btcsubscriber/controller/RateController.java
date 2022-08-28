@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/rate")
+@RequestMapping("/api/v1/rate")
 public record RateController(RateService rateService) {
     private static final Logger LOGGER = LoggerFactory.getLogger(RateController.class);
 

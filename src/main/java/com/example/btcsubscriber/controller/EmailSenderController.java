@@ -12,15 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/sendEmails")
-public class EmailSenderController {
+@RequestMapping("/api/v1/sendEmails")
+public record EmailSenderController(EmailService emailService) {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubscriptionController.class);
-
-    private final EmailService emailService;
-
-    public EmailSenderController(EmailService emailService) {
-        this.emailService = emailService;
-    }
 
     @PostMapping
     public ResponseEntity<String> sendEmails() {

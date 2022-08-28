@@ -7,10 +7,5 @@ public interface SubscriptionsRepository {
 
     boolean isExist(String email);
 
-    /**
-     * Get user subscription emails
-     *
-     * @return the list of user subscription emails
-     */
     List<String> getSubscriptions();
 }

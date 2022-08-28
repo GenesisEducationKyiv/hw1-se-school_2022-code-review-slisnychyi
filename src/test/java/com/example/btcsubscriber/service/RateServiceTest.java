@@ -1,6 +1,7 @@
 package com.example.btcsubscriber.service;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -19,6 +20,11 @@ import static org.mockito.Mockito.when;
 class RateServiceTest {
 
     @Test
+    @DisplayName("""
+                given external rate service that returns crypto rates
+                when call rate service
+                should return the current rate for given currency
+            """)
     public void should_getBtcRate_when_serverIsWorking() throws IOException, InterruptedException, URISyntaxException {
         //given
         String btcApi = "https://minfin.com.ua/api/currency/crypto/list/?filter[code]=btc";

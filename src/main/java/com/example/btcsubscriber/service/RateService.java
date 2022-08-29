@@ -1,6 +1,7 @@
 package com.example.btcsubscriber.service;
 
 import com.example.btcsubscriber.controller.RateController;
+import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Service
 public class RateService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RateController.class);
+    private static final String RATE_PATH = "$['data'][0]['price']['uah']";
 
     private final String btcApi;
     private final HttpClient httpClient;
@@ -32,10 +34,15 @@ public class RateService {
             return Optional.of(httpClient.send(request, HttpResponse.BodyHandlers.ofString()))
                     .map(HttpResponse::body)
                     .map(JsonPath::parse)
-                    .map(e -> e.read("$['data'][0]['price']['uah']", Long.class));
+                    .map(RateService::getRateValue);
         } catch (IOException | InterruptedException e) {
             LOGGER.error("unable to get btc rate.", e);
             return Optional.empty();
         }
     }
+
+    private static Long getRateValue(DocumentContext e) {
+        return e.read(RATE_PATH, Long.class);
+    }
+
 }

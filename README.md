@@ -20,11 +20,7 @@
 
 ### how to run
 #### local run
-1. update `application.properties` file with following data:
-- spring.mail.username=
-- spring.mail.password=
-
-2. run from docker local image
+run from docker local image
 
 - clone git repository
 - run `./mvnw clean install`
@@ -34,7 +30,7 @@
 example:
 ```shell
 ./mvnw clean install && docker build -t btc-subscriber .
-docker run btc-subscriber
+docker run -e MAIL_USERNAME=username -e MAIL_PASSWORD=password -p 8080:8080 btc-subscriber
 
 ```
 

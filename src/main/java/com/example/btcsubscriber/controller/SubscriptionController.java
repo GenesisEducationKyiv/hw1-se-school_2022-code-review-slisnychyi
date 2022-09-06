@@ -1,10 +1,10 @@
 package com.example.btcsubscriber.controller;
 
 import com.example.btcsubscriber.exceptions.SubscriptionException;
-import com.example.btcsubscriber.repository.SubscriptionsRepository;
 import com.example.btcsubscriber.service.SubscriptionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+
 @RestController
-@RequestMapping(value = "/api/v1/subscription")
+@RequestMapping(value = "/api/v1/subscription", consumes = MediaType.APPLICATION_JSON_VALUE)
 public record SubscriptionController(SubscriptionService subscriptionService) {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubscriptionController.class);
 

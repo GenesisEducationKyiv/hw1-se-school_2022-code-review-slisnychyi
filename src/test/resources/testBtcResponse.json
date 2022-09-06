@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "id": "bitcoin",
+      "code": "btc",
+      "name": "Bitcoin",
+      "name_ru": "Биткоин",
+      "name_ua": "Біткоін",
+      "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+      "rank": 1,
+      "decimal_place": 2,
+      "circulating_supply": 19107800,
+      "price": {
+        "usd": 24550,
+        "eur": 24005,
+        "uah": 907196,
+        "btc": 1
+      },
+      "total_volume": {},
+      "market_cap": {},
+      "trend": {},
+      "last_update": "2022-07-30 21:44:59"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "cpp": 10,
+    "total_count": 1,
+    "sort_by": "popularity",
+    "sort_dir": "ASC"
+  }
+}

@@ -21,7 +21,7 @@ public record EmailSenderController(EmailService emailService) {
         LOGGER.info("received request to distribute emails");
         try {
             emailService.sendEmails();
-            return ResponseEntity.ok("emails were notified.");
+            return ResponseEntity.ok("emails were distributed.");
         } catch (RateException e) {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Unable to get rates. Try again later");
         }

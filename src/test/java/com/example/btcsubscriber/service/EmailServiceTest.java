@@ -23,10 +23,10 @@ class EmailServiceTest {
     //given
     List<String> emails = List.of("dummy@email.com");
     JavaMailSender mailSender = mock(JavaMailSender.class);
-    RateService rateService = mock(RateService.class);
+    RateProvider rateProvider = mock(RateProvider.class);
     SubscriptionsRepository subscriptionsRepository = mock(SubscriptionsRepository.class);
-    EmailService emailService = new EmailService(mailSender, subscriptionsRepository, rateService);
-    when(rateService.getBtcRate()).thenReturn(Optional.of(10L));
+    EmailService emailService = new EmailService(mailSender, subscriptionsRepository, rateProvider);
+    when(rateProvider.getRate()).thenReturn(Optional.of(10L));
     when(subscriptionsRepository.getSubscriptions()).thenReturn(emails);
     //when
     emailService.sendEmails();
@@ -39,10 +39,10 @@ class EmailServiceTest {
   public void should_throwException_when_cantGetRates() {
     //given
     JavaMailSender mailSender = mock(JavaMailSender.class);
-    RateService rateService = mock(RateService.class);
+    RateProvider rateProvider = mock(RateProvider.class);
     SubscriptionsRepository subscriptionsRepository = mock(SubscriptionsRepository.class);
-    EmailService emailService = new EmailService(mailSender, subscriptionsRepository, rateService);
-    given(rateService.getBtcRate()).willAnswer(invocationOnMock -> {
+    EmailService emailService = new EmailService(mailSender, subscriptionsRepository, rateProvider);
+    given(rateProvider.getRate()).willAnswer(invocationOnMock -> {
       throw new RateException("");
     });
     // when then

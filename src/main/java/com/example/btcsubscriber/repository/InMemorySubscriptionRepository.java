@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class InMemmorySubscriptionRepository implements SubscriptionsRepository {
+public class InMemorySubscriptionRepository implements SubscriptionsRepository {
     private final List<String> emails;
 
-    public InMemmorySubscriptionRepository() {
+    public InMemorySubscriptionRepository() {
         this.emails = new ArrayList<>();
     }
 

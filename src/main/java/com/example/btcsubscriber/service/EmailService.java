@@ -15,10 +15,10 @@ public class EmailService {
 
   private final JavaMailSender mailSender;
   private final SubscriptionsRepository subscriptionsRepository;
-  private final RateService rateService;
+  private final RateProvider rateProvider;
 
   public void sendEmails() throws RateException {
-    Long rate = rateService.getBtcRate()
+    Long rate = rateProvider.getRate()
         .orElseThrow(() -> new RateException("unable to receive rates."));
     List<String> emails = subscriptionsRepository.getSubscriptions();
     SimpleMailMessage msg = generateEmail(rate, emails);

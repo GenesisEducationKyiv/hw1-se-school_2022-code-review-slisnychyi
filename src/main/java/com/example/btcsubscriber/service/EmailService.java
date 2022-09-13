@@ -14,23 +14,16 @@ import java.util.List;
 public class EmailService {
 
   private final JavaMailSender mailSender;
+  private final EmailGenerator emailGenerator;
   private final SubscriptionsRepository subscriptionsRepository;
-  private final RateService rateService;
+  private final RateProvider rateProvider;
 
   public void sendEmails() throws RateException {
-    Long rate = rateService.getBtcRate()
+    long rate = rateProvider.getRate()
         .orElseThrow(() -> new RateException("unable to receive rates."));
     List<String> emails = subscriptionsRepository.getSubscriptions();
-    SimpleMailMessage msg = generateEmail(rate, emails);
+    SimpleMailMessage msg = emailGenerator.generateEmail(rate, emails);
     mailSender.send(msg);
-  }
-
-  SimpleMailMessage generateEmail(Long rate, List<String> emails) {
-    SimpleMailMessage msg = new SimpleMailMessage();
-    msg.setTo(emails.toArray(new String[] { }));
-    msg.setSubject("BTC to UAH rate");
-    msg.setText("BTC to UAH rate = " + rate);
-    return msg;
   }
 
 }

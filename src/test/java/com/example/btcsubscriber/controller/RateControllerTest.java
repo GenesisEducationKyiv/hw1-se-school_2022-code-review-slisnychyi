@@ -1,6 +1,7 @@
 package com.example.btcsubscriber.controller;
 
-import com.example.btcsubscriber.service.RateService;
+import com.example.btcsubscriber.service.MinfinRateProvider;
+import com.example.btcsubscriber.service.RateProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,12 +23,12 @@ class RateControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  private RateService rateService;
+  private RateProvider rateProvider;
 
   @Test
   public void should_getBtcRate_when_rateExists() throws Exception {
     //given
-    when(rateService.getBtcRate()).thenReturn(Optional.of(10L));
+    when(rateProvider.getRate()).thenReturn(Optional.of(10L));
 
     //when then
     mockMvc.perform(
@@ -41,7 +42,7 @@ class RateControllerTest {
   @Test
   public void should_getNotFound_when_noRateExists() throws Exception {
     //given
-    when(rateService.getBtcRate()).thenReturn(Optional.empty());
+    when(rateProvider.getRate()).thenReturn(Optional.empty());
 
     //when then
     mockMvc.perform(

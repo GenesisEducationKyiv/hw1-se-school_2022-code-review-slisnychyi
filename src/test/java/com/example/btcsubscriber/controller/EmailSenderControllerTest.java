@@ -1,7 +1,7 @@
 package com.example.btcsubscriber.controller;
 
 import com.example.btcsubscriber.exceptions.RateException;
-import com.example.btcsubscriber.service.EmailService;
+import com.example.btcsubscriber.service.email.EmailService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

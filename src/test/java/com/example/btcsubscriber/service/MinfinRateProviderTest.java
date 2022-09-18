@@ -1,5 +1,6 @@
 package com.example.btcsubscriber.service;
 
+import com.example.btcsubscriber.service.rate.provider.MinfinRateProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class MinfinRateProviderTest {
     HttpClient httpClient = mock(HttpClient.class);
     HttpResponse response = mock(HttpResponse.class);
     MinfinRateProvider service = new MinfinRateProvider(httpClient);
-    service.setBtcApi(btcApi);
+    service.setApi(btcApi);
     URI uri = Objects.requireNonNull(MinfinRateProviderTest.class.getResource("/testBtcResponse.json")).toURI();
     String body = String.join(
         "",

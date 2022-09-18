@@ -1,7 +1,8 @@
-package com.example.btcsubscriber.service;
+package com.example.btcsubscriber.service.email;
 
 import com.example.btcsubscriber.exceptions.RateException;
 import com.example.btcsubscriber.repository.SubscriptionsRepository;
+import com.example.btcsubscriber.service.rate.RateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,10 +17,10 @@ public class EmailService {
   private final JavaMailSender mailSender;
   private final EmailGenerator emailGenerator;
   private final SubscriptionsRepository subscriptionsRepository;
-  private final RateProvider rateProvider;
+  private final RateService rateService;
 
   public void sendEmails() throws RateException {
-    long rate = rateProvider.getRate()
+    long rate = rateService.getRate()
         .orElseThrow(() -> new RateException("unable to receive rates."));
     List<String> emails = subscriptionsRepository.getSubscriptions();
     SimpleMailMessage msg = emailGenerator.generateEmail(rate, emails);

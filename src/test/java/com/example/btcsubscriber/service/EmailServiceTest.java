@@ -2,6 +2,9 @@ package com.example.btcsubscriber.service;
 
 import com.example.btcsubscriber.exceptions.RateException;
 import com.example.btcsubscriber.repository.SubscriptionsRepository;
+import com.example.btcsubscriber.service.email.EmailGenerator;
+import com.example.btcsubscriber.service.email.EmailService;
+import com.example.btcsubscriber.service.rate.RateService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -24,7 +27,7 @@ class EmailServiceTest {
   @Mock
   private JavaMailSender mailSender;
   @Mock
-  private RateProvider rateProvider;
+  private RateService rateService;
   @Mock
   private SubscriptionsRepository subscriptionsRepository;
   @Mock
@@ -35,8 +38,8 @@ class EmailServiceTest {
     //given
     List<String> emails = List.of("dummy@email.com");
     SimpleMailMessage message = new SimpleMailMessage();
-    EmailService emailService = new EmailService(mailSender, emailGenerator, subscriptionsRepository, rateProvider);
-    when(rateProvider.getRate()).thenReturn(Optional.of(10L));
+    EmailService emailService = new EmailService(mailSender, emailGenerator, subscriptionsRepository, rateService);
+    when(rateService.getRate()).thenReturn(Optional.of(10L));
     when(subscriptionsRepository.getSubscriptions()).thenReturn(emails);
     when(emailGenerator.generateEmail(10, emails)).thenReturn(message);
     //when
@@ -48,8 +51,8 @@ class EmailServiceTest {
   @Test
   public void should_throwException_when_cantGetRates() {
     //given
-    EmailService emailService = new EmailService(mailSender, emailGenerator, subscriptionsRepository, rateProvider);
-    given(rateProvider.getRate()).willAnswer(invocationOnMock -> {
+    EmailService emailService = new EmailService(mailSender, emailGenerator, subscriptionsRepository, rateService);
+    given(rateService.getRate()).willAnswer(invocationOnMock -> {
       throw new RateException("");
     });
     // when then

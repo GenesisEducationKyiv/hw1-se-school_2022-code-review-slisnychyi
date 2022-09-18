@@ -1,4 +1,4 @@
-package com.example.btcsubscriber.service;
+package com.example.btcsubscriber.service.email;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;

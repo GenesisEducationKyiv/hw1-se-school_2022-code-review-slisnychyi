@@ -1,7 +1,6 @@
 package com.example.btcsubscriber.controller;
 
-import com.example.btcsubscriber.service.MinfinRateProvider;
-import com.example.btcsubscriber.service.RateProvider;
+import com.example.btcsubscriber.service.rate.RateService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,18 +22,18 @@ class RateControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  private RateProvider rateProvider;
+  private RateService rateService;
 
   @Test
   public void should_getBtcRate_when_rateExists() throws Exception {
     //given
-    when(rateProvider.getRate()).thenReturn(Optional.of(10L));
+    when(rateService.getRate()).thenReturn(Optional.of(10L));
 
     //when then
     mockMvc.perform(
             MockMvcRequestBuilders
                 .get(URI.create("/api/v1/rate"))
-                )
+        )
         .andExpect(status().isOk())
         .andExpect(MockMvcResultMatchers.content().string("10"));
   }
@@ -42,13 +41,13 @@ class RateControllerTest {
   @Test
   public void should_getNotFound_when_noRateExists() throws Exception {
     //given
-    when(rateProvider.getRate()).thenReturn(Optional.empty());
+    when(rateService.getRate()).thenReturn(Optional.empty());
 
     //when then
     mockMvc.perform(
             MockMvcRequestBuilders
                 .get(URI.create("/api/v1/rate"))
-                )
+        )
         .andExpect(status().isNotFound());
   }
 

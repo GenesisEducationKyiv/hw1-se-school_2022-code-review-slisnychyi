@@ -28,10 +28,10 @@ public class CachedRateService implements RateService {
       return Optional.of(cachedValue);
     }
     return rateService.getRate()
-        .flatMap(e -> {
+        .map(rate -> {
           lastUpdate = now.plusMinutes(DEFAULT_TIMEOUT_MINUTES);
-          cachedValue = e;
-          return Optional.of(e);
+          cachedValue = rate;
+          return rate;
         });
   }
 

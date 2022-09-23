@@ -1,10 +1,10 @@
 package com.example.btcsubscriber.service;
 
-import com.example.btcsubscriber.exceptions.RateException;
-import com.example.btcsubscriber.repository.SubscriptionsRepository;
-import com.example.btcsubscriber.service.email.EmailGenerator;
-import com.example.btcsubscriber.service.email.EmailService;
-import com.example.btcsubscriber.service.rate.RateService;
+import com.example.btcsubscriber.rate.RateException;
+import com.example.btcsubscriber.subscription.SubscriptionsRepository;
+import com.example.btcsubscriber.email.EmailGenerator;
+import com.example.btcsubscriber.email.EmailService;
+import com.example.btcsubscriber.rate.RateService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

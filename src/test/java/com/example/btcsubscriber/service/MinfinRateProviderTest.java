@@ -1,6 +1,6 @@
 package com.example.btcsubscriber.service;
 
-import com.example.btcsubscriber.service.rate.provider.MinfinRateProvider;
+import com.example.btcsubscriber.rate.provider.MinfinRateProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

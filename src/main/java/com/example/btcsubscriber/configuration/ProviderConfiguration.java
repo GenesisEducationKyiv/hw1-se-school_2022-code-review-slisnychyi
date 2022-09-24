@@ -1,9 +1,9 @@
 package com.example.btcsubscriber.configuration;
 
-import com.example.btcsubscriber.service.rate.provider.ProviderType;
-import com.example.btcsubscriber.service.rate.provider.RateProvider;
-import com.example.btcsubscriber.service.rate.RateService;
-import com.example.btcsubscriber.service.rate.RateServiceFactory;
+import com.example.btcsubscriber.rate.provider.ProviderType;
+import com.example.btcsubscriber.rate.provider.RateProvider;
+import com.example.btcsubscriber.rate.RateService;
+import com.example.btcsubscriber.rate.RateServiceFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.context.annotation.Bean;

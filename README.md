@@ -7,6 +7,7 @@
 
 
 ### design overview
+**type**: slicing by component or package by component
 ![img.png](img.png)
 
 ##### endpoints:

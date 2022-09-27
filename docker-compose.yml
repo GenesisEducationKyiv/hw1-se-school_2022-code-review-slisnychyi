@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  rate_provider:
+    build: ./rate_provider
+    image: rate_provider:latest
+    hostname: localhost
+    restart: always
+    ports:
+      - '8082:8082'
+  email_subscription:
+    build: ./email_subscriber
+    image: email_subscription:latest
+    hostname: localhost
+    restart: always
+    ports:
+      - '8081:8081'

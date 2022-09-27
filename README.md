@@ -7,8 +7,16 @@
 
 
 ### design overview
+**type**: layered architecture
+![layered.png](./architecture/layered.png)
+
 **type**: slicing by component or package by component
-![img.png](img.png)
+![modular_architecture.png](./architecture/modular_architecture.png)
+
+**_`updated to`_**
+**type**: microservice architecture
+![microservice.png](./architecture/microservice.png)
+
 
 ##### endpoints:
 
